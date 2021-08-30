@@ -1,0 +1,128 @@
+[
+ {
+  "UberDateLog": "30/08/2021 06-52-16 PM",
+  "UberLogs": [
+   "ERROR: Cleaning Records could not be sent to UberTempCleaningRecords.",
+   "Traceback (most recent call last):\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/mysql/connector/connection_cext.py\", line 239, in _open_connection\n    self._cmysql.connect(**cnx_kwargs)\n_mysql_connector.MySQLInterfaceError: Unknown MySQL server host '486@localhost' (22)\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/engine/base.py\", line 3212, in _wrap_pool_connect\n    return fn()\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/pool/base.py\", line 307, in connect\n    return _ConnectionFairy._checkout(self)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/pool/base.py\", line 767, in _checkout\n    fairy = _ConnectionRecord.checkout(pool)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/pool/base.py\", line 425, in checkout\n    rec = pool._do_get()\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/pool/impl.py\", line 146, in _do_get\n    self._dec_overflow()\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/util/langhelpers.py\", line 70, in __exit__\n    compat.raise_(\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/util/compat.py\", line 207, in raise_\n    raise exception\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/pool/impl.py\", line 143, in _do_get\n    return self._create_connection()\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/pool/base.py\", line 253, in _create_connection\n    return _ConnectionRecord(self)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/pool/base.py\", line 368, in __init__\n    self.__connect()\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/pool/base.py\", line 611, in __connect\n    pool.logger.debug(\"Error on connect(): %s\", e)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/util/langhelpers.py\", line 70, in __exit__\n    compat.raise_(\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/util/compat.py\", line 207, in raise_\n    raise exception\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/pool/base.py\", line 605, in __connect\n    connection = pool._invoke_creator(self)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/engine/create.py\", line 578, in connect\n    return dialect.connect(*cargs, **cparams)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/engine/default.py\", line 584, in connect\n    return self.dbapi.connect(*cargs, **cparams)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/mysql/connector/__init__.py\", line 272, in connect\n    return CMySQLConnection(*args, **kwargs)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/mysql/connector/connection_cext.py\", line 85, in __init__\n    self.connect(**kwargs)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/mysql/connector/abstracts.py\", line 1009, in connect\n    self._open_connection()\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/mysql/connector/connection_cext.py\", line 241, in _open_connection\n    raise errors.get_mysql_exception(msg=exc.msg, errno=exc.errno,\nmysql.connector.errors.DatabaseError: 2005 (HY000): Unknown MySQL server host '486@localhost' (22)\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/home/manny/UberBuild/Helpers/DatabaseFunctions.py\", line 48, in send_DB_records\n    final_df.to_sql('UberTempCleaningRecords', engine, if_exists='append', index=False)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/pandas/core/generic.py\", line 2872, in to_sql\n    sql.to_sql(\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/pandas/io/sql.py\", line 717, in to_sql\n    pandas_sql.to_sql(\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/pandas/io/sql.py\", line 1751, in to_sql\n    table = self.prep_table(\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/pandas/io/sql.py\", line 1650, in prep_table\n    table.create()\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/pandas/io/sql.py\", line 856, in create\n    if self.exists():\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/pandas/io/sql.py\", line 840, in exists\n    return self.pd_sql.has_table(self.name, self.schema)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/pandas/io/sql.py\", line 1783, in has_table\n    insp = sa.inspect(self.connectable)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/inspection.py\", line 64, in inspect\n    ret = reg(subject)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/engine/reflection.py\", line 182, in _engine_insp\n    return Inspector._construct(Inspector._init_engine, bind)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/engine/reflection.py\", line 117, in _construct\n    init(self, bind)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/engine/reflection.py\", line 128, in _init_engine\n    engine.connect().close()\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/engine/base.py\", line 3166, in connect\n    return self._connection_cls(self, close_with_result=close_with_result)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/engine/base.py\", line 96, in __init__\n    else engine.raw_connection()\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/engine/base.py\", line 3245, in raw_connection\n    return self._wrap_pool_connect(self.pool.connect, _connection)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/engine/base.py\", line 3215, in _wrap_pool_connect\n    Connection._handle_dbapi_exception_noconnection(\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/engine/base.py\", line 2069, in _handle_dbapi_exception_noconnection\n    util.raise_(\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/util/compat.py\", line 207, in raise_\n    raise exception\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/engine/base.py\", line 3212, in _wrap_pool_connect\n    return fn()\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/pool/base.py\", line 307, in connect\n    return _ConnectionFairy._checkout(self)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/pool/base.py\", line 767, in _checkout\n    fairy = _ConnectionRecord.checkout(pool)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/pool/base.py\", line 425, in checkout\n    rec = pool._do_get()\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/pool/impl.py\", line 146, in _do_get\n    self._dec_overflow()\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/util/langhelpers.py\", line 70, in __exit__\n    compat.raise_(\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/util/compat.py\", line 207, in raise_\n    raise exception\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/pool/impl.py\", line 143, in _do_get\n    return self._create_connection()\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/pool/base.py\", line 253, in _create_connection\n    return _ConnectionRecord(self)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/pool/base.py\", line 368, in __init__\n    self.__connect()\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/pool/base.py\", line 611, in __connect\n    pool.logger.debug(\"Error on connect(): %s\", e)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/util/langhelpers.py\", line 70, in __exit__\n    compat.raise_(\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/util/compat.py\", line 207, in raise_\n    raise exception\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/pool/base.py\", line 605, in __connect\n    connection = pool._invoke_creator(self)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/engine/create.py\", line 578, in connect\n    return dialect.connect(*cargs, **cparams)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/sqlalchemy/engine/default.py\", line 584, in connect\n    return self.dbapi.connect(*cargs, **cparams)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/mysql/connector/__init__.py\", line 272, in connect\n    return CMySQLConnection(*args, **kwargs)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/mysql/connector/connection_cext.py\", line 85, in __init__\n    self.connect(**kwargs)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/mysql/connector/abstracts.py\", line 1009, in connect\n    self._open_connection()\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/mysql/connector/connection_cext.py\", line 241, in _open_connection\n    raise errors.get_mysql_exception(msg=exc.msg, errno=exc.errno,\nsqlalchemy.exc.DatabaseError: (mysql.connector.errors.DatabaseError) 2005 (HY000): Unknown MySQL server host '486@localhost' (22)\n(Background on this error at: https://sqlalche.me/e/14/4xp6)\n",
+   "Exiting the Program"
+  ]
+ },
+ {
+  "UberDateLog": "30/08/2021 06-52-16 PM",
+  "UberLogs": [
+   [
+    "Folder settings from folder_config.json Loaded successfully.",
+    "CSV and HTML files copied successfully to the newly created designated folders.",
+    "Folder Structure created successfully."
+   ],
+   [
+    "Creating the final dataframe having all the required columns",
+    "DataFrame configurations from DataFrameConfig.json Loaded successfully.",
+    "Config settings from config.json Loaded successfully.",
+    "Date and Time Data successfully loaded in the dataframe.",
+    "Renaming the dataframe columns to one provided in the CPVV Template !!!",
+    "Rendering the dataframe to HTML!!!"
+   ],
+   [
+    "Database credentials from DBconfig.json Loaded successfully.",
+    "Connecting to Database",
+    "Sending Records to UberTempCleaningRecords table in database...."
+   ],
+   [
+    "Config settings from config.json Loaded successfully.",
+    "Concatenating the final HTML!!!",
+    "Saving the final HTML to HTML file in HTML Folder!!!"
+   ],
+   [
+    "Begin to write the PDF file from the resultant HTML!!!",
+    "PDF written successfully from the resultant HTML file!!!"
+   ]
+  ]
+ },
+ {
+  "UberDateLog": "30/08/2021 06-58-33 PM",
+  "UberLogs": [
+   "ERROR: Something went wrong while executing InsertJSONCleaningRecord. Please Check UberCleaningRecords table in the database",
+   "Traceback (most recent call last):\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/mysql/connector/connection_cext.py\", line 513, in cmd_query\n    self._cmysql.query(query,\n_mysql_connector.MySQLInterfaceError: The user specified as a definer ('admin'@'%') does not exist\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/manny/UberBuild/Helpers/DatabaseFunctions.py\", line 69, in send_DB_records\n    results = cursor.callproc(\"InsertJSONCleaningRecord\", [parameterOut])\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/mysql/connector/cursor_cext.py\", line 441, in callproc\n    result = self._cnx.cmd_query(call, raw=self._raw,\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/mysql/connector/connection_cext.py\", line 518, in cmd_query\n    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,\nmysql.connector.errors.DatabaseError: 1449 (HY000): The user specified as a definer ('admin'@'%') does not exist\n",
+   "Exiting the Program"
+  ]
+ },
+ {
+  "UberDateLog": "30/08/2021 07-02-13 PM",
+  "UberLogs": [
+   "ERROR: Something went wrong while executing InsertJSONCleaningRecord. Please Check UberCleaningRecords table in the database",
+   "Traceback (most recent call last):\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/mysql/connector/connection_cext.py\", line 513, in cmd_query\n    self._cmysql.query(query,\n_mysql_connector.MySQLInterfaceError: The user specified as a definer ('manny'@'%') does not exist\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/manny/UberBuild/Helpers/DatabaseFunctions.py\", line 69, in send_DB_records\n    results = cursor.callproc(\"InsertJSONCleaningRecord\", [parameterOut])\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/mysql/connector/cursor_cext.py\", line 441, in callproc\n    result = self._cnx.cmd_query(call, raw=self._raw,\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.8/site-packages/mysql/connector/connection_cext.py\", line 518, in cmd_query\n    raise errors.get_mysql_exception(exc.errno, msg=exc.msg,\nmysql.connector.errors.DatabaseError: 1449 (HY000): The user specified as a definer ('manny'@'%') does not exist\n",
+   "Exiting the Program"
+  ]
+ },
+ {
+  "UberDateLog": "30/08/2021 07-04-50 PM",
+  "UberLogs": [
+   [
+    "Folder settings from folder_config.json Loaded successfully.",
+    "CSV and HTML files copied successfully to the newly created designated folders.",
+    "Folder Structure created successfully."
+   ],
+   [
+    "Creating the final dataframe having all the required columns",
+    "DataFrame configurations from DataFrameConfig.json Loaded successfully.",
+    "Config settings from config.json Loaded successfully.",
+    "Date and Time Data successfully loaded in the dataframe.",
+    "Renaming the dataframe columns to one provided in the CPVV Template !!!",
+    "Rendering the dataframe to HTML!!!"
+   ],
+   [
+    "Database credentials from DBconfig.json Loaded successfully.",
+    "Connecting to Database",
+    "Sending Records to UberTempCleaningRecords table in database....",
+    "Sending Records to UberCleaningRecords table through InsertJSONCleaningRecord stored procedure",
+    "Insert succeeded to UberCleaningRecords, row count = 6",
+    "Records successfully sent to UberCleaningRecords in database !!!"
+   ],
+   [
+    "Config settings from config.json Loaded successfully.",
+    "Concatenating the final HTML!!!",
+    "Saving the final HTML to HTML file in HTML Folder!!!"
+   ],
+   [
+    "Begin to write the PDF file from the resultant HTML!!!",
+    "PDF written successfully from the resultant HTML file!!!"
+   ]
+  ]
+ },
+ {
+  "UberDateLog": "30/08/2021 07-06-45 PM",
+  "UberLogs": [
+   [
+    "Folder settings from folder_config.json Loaded successfully.",
+    "CSV and HTML files copied successfully to the newly created designated folders.",
+    "Folder Structure created successfully."
+   ],
+   [
+    "Creating the final dataframe having all the required columns",
+    "DataFrame configurations from DataFrameConfig.json Loaded successfully.",
+    "Config settings from config.json Loaded successfully.",
+    "Date and Time Data successfully loaded in the dataframe.",
+    "Renaming the dataframe columns to one provided in the CPVV Template !!!",
+    "Rendering the dataframe to HTML!!!"
+   ],
+   [
+    "Database credentials from DBconfig.json Loaded successfully.",
+    "Connecting to Database",
+    "Sending Records to UberTempCleaningRecords table in database....",
+    "Sending Records to UberCleaningRecords table through InsertJSONCleaningRecord stored procedure",
+    "Insert succeeded to UberCleaningRecords, row count = 2",
+    "Records successfully sent to UberCleaningRecords in database !!!"
+   ],
+   [
+    "Config settings from config.json Loaded successfully.",
+    "Concatenating the final HTML!!!",
+    "Saving the final HTML to HTML file in HTML Folder!!!"
+   ],
+   [
+    "Begin to write the PDF file from the resultant HTML!!!",
+    "PDF written successfully from the resultant HTML file!!!"
+   ]
+  ]
+ }
+]

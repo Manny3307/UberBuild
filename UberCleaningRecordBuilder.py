@@ -34,8 +34,8 @@ final_df = UberDataFrameFuntion.create_final_df(folderName)
 UberLogString.append(UberDataFrameFuntion.get_DataFrameFuntions_LogString())
 
 #Send the records to database
-#datafunctions = dbFunction()
-#UberLogString.append(datafunctions.send_DB_records(final_df))
+datafunctions = dbFunction()
+UberLogString.append(datafunctions.send_DB_records(final_df))
 
 #Rename the Final DataFrame colums to match with CPVV standards
 final_df = UberDataFrameFuntion.rename_df_columns()

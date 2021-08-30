@@ -3,9 +3,9 @@
     "DBConfigs": 
         {
             "DBConnecter": "mysql+mysqlconnector",
-            "UserName": "admin",
-            "Password": "pikolo486",
-            "ServerOrEndPoint": "manny-uber-records.cwl0oxqn3sec.us-east-2.rds.amazonaws.com",
+            "UserName": "manny",
+            "Password": "Mallory_486",
+            "ServerOrEndPoint": "localhost",
             "DatabaseName": "manny_uber_records_2021"
         }
 }
