@@ -1,0 +1,37 @@
+[
+ {
+  "UberDateLog": "02/09/2021 03-22-57 PM",
+  "UberLogs": [
+   [
+    "Folder settings from folder_config.json Loaded successfully.",
+    "CSV and HTML files copied successfully to the newly created designated folders.",
+    "Folder Structure created successfully."
+   ],
+   [
+    "Creating the final dataframe having all the required columns",
+    "DataFrame configurations from DataFrameConfig.json Loaded successfully.",
+    "Config settings from config.json Loaded successfully.",
+    "Date and Time Data successfully loaded in the dataframe.",
+    "Renaming the dataframe columns to one provided in the CPVV Template !!!",
+    "Rendering the dataframe to HTML!!!"
+   ],
+   [
+    "Database credentials from DBconfig.json Loaded successfully.",
+    "Connecting to Database",
+    "Sending Records to UberTempCleaningRecords table in database....",
+    "Sending Records to UberCleaningRecords table through InsertJSONCleaningRecord stored procedure",
+    "Insert succeeded to UberCleaningRecords, row count = 1",
+    "Records successfully sent to UberCleaningRecords in database !!!"
+   ],
+   [
+    "Config settings from config.json Loaded successfully.",
+    "Concatenating the final HTML!!!",
+    "Saving the final HTML to HTML file in HTML Folder!!!"
+   ],
+   [
+    "Begin to write the PDF file from the resultant HTML!!!",
+    "PDF written successfully from the resultant HTML file!!!"
+   ]
+  ]
+ }
+]

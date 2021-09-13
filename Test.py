@@ -195,4 +195,10 @@ finally:
     connection.close() 
     '''
 
-
+'''
+#Create an environment for Uber Records
+RUN conda create --name uberrecords python=3.9.6
+RUN pip install pandas matplotlib seaborn scikit-learn
+SHELL ["/bin/bash", "--login", "-c"]
+RUN conda activate uberrecords
+'''
