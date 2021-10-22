@@ -4,7 +4,7 @@
         {
             "DBConnecter": "mysql+mysqlconnector",
             "UserName": "manny",
-            "Password": "Mallory_486",
+            "Password": "mallory_486",
             "ServerOrEndPoint": "localhost",
             "DatabaseName": "manny_uber_records_2021"
         }
