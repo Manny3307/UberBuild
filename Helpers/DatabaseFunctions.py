@@ -23,12 +23,13 @@ class dbFunction:
             DBConfig = open('./Config/DBConfig.json')
             dbconf = json.load(DBConfig)
 
-            global DBConnector, UserName, Password, ServerOrEndPoint, DatabaseName
+            global DBConnector, UserName, Password, ServerOrEndPoint, DatabaseName, engine
             DBConnector = dbconf["DBConfigs"]["DBConnecter"]
             UserName = dbconf["DBConfigs"]["UserName"]
             Password = dbconf["DBConfigs"]["Password"]
             ServerOrEndPoint = dbconf["DBConfigs"]["ServerOrEndPoint"]
             DatabaseName = dbconf["DBConfigs"]["DatabaseName"]
+            #engine = create_engine(f"{DBConnector}://{UserName}:{Password}@{ServerOrEndPoint}/{DatabaseName}", encoding='utf8')
         except:
             objUberExceptionLogging.UberLogException(ExceptionMessages["Exceptions"]["Database_config"], True, True)
 
@@ -88,3 +89,5 @@ class dbFunction:
                 UberLogString.append("Failed to send Cleaning Records to database !!!")    
         
         return UberLogString
+
+    
