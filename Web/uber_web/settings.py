@@ -51,12 +51,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'uber_web.urls'
+ROOT_URLCONF = 'cleaningrecord_views.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR,'cleaningrecord_views.templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -117,13 +117,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'cleaningrecord_views.static/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, './cleaningrecord_views/static'),
+    os.path.join(BASE_DIR, 'cleaningrecord_views/static'),
 )
 
-STATIC_ROOT = os.path.join(BASE_DIR, './cleaningrecord_views/staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'cleaningrecord_views/staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-auto-field
