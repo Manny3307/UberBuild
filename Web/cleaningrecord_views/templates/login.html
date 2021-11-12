@@ -41,7 +41,7 @@
                <div class="login_section">
                   <div class="logo_login">
                      <div class="center">
-                        <font style="color: white; font-size: xx-large; font-weight: 500;">Cleaning Record Login</font>
+                        <span style="color: white; font-size: xx-large; font-weight: 500;">Cleaning Record Login</span>
                      </div>
                   </div>
                   <div style="text-align: center; color: maroon; font-weight: normal;">
@@ -54,20 +54,22 @@
                   </div>
                   <div class="login_form">
                     
-                    <form method="post">
+                    <form method="post" action="{% url 'login' %}">
                          {% csrf_token %}
                         <fieldset>
                             <div class="field">
                               <label class="label_field">Email Address</label>
-                              <input type="email" name="email" placeholder="E-mail" />
+                              {{ login_form.username }}
                            </div>
                            <div class="field">
                               <label class="label_field">Password</label>
-                              <input type="password" name="password" placeholder="Password" />
+                              {{ login_form.password }}
                            </div>
                            <div class="field">
                               <label class="label_field hidden">hidden label</label>
-                              <label class="form-check-label"><input type="checkbox" class="form-check-input"> Remember Me</label>
+                              <label class="form-check-label">
+                                 {{ login_form.rememberme }}
+                                  Remember Me</label>
                               <a class="forgot" href="">Forgotten Password?</a>
                            </div>
                            <div class="field margin_0">
@@ -89,9 +91,6 @@
             </div>
          </div>
       </div>
-      
-         
-      
       <!-- jQuery -->
       <script src="{% static 'js/jquery.min.js' %}"></script>
       <script src="{% static 'js/popper.min.js' %}"></script>

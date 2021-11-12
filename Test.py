@@ -7,9 +7,30 @@ import ast
 from sqlalchemy import create_engine
 from time import sleep
 from json import dumps
-from kafka import KafkaProducer
+
+import redis
+import websocket
+import time
+
+ws = websocket.WebSocket()
+ws.connect("ws://127.0.0.1:8000/appmsg/")
+for i in range(10):
+    time.sleep(3)
+    ws.send(json.dumps({'value': f'Hi - {i}'}))
 
 
+'''publisher = redis.Redis(host = 'localhost', port = 6379)
+message=""
+channel = "test"
+while(message!="exit"):
+ message = input("")
+ send_message = "Python : " + message
+ publisher.publish(channel, send_message)
+'''
+
+
+
+'''
 
 path = "./Config/FolderStructure.json"
 folders = {}
@@ -20,6 +41,7 @@ with open(path, 'r') as f:
 print(folders["folder_name"])
 folder1["Temp1"] = folders["folder_name"]
 print(folder1)
+'''
 '''
 producer = KafkaProducer(bootstrap_servers=['localhost:9092'],
                          value_serializer=lambda x: 

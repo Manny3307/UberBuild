@@ -1,30 +1,54 @@
 from django import forms
+from django.http import HttpResponse
+from django.http.request import HttpRequest
 from django.http.response import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
-
-from .forms import LoginForm
+from .forms import FolderForm, LoginForm
 
 # Create your views here.
+# Login Page Call
+def login_page(request):
+    if request.method == 'POST':
+        login_form = LoginForm(request.POST)
 
-class HomePageView(TemplateView):
-    template_name = 'home.html'
+        if login_form.is_valid():
+            return HttpResponseRedirect('/home/')
 
-class AboutPageView(TemplateView):
-    template_name = 'about.html'
+    else:
+        login_form = LoginForm()
 
-class LoginPageView(TemplateView):
-    template_name = 'login.html'
-    
-    def post(self, request, *args, **kwargs):
-        username = ""
-        if(request.method == 'POST'):
-            MyLoginForm = LoginForm(request.POST)
+    return render(request, 'login.html', {'login_form': login_form})
 
-            if(MyLoginForm.is_valid()):
-                username = MyLoginForm.cleaned_data['email'] 
+# Home Page Call
+def home_page(request):
+    if request.method == 'POST':
+        record_form = FolderForm(request.POST, request.FILES)
 
-        else:
-            MyLoginForm = LoginForm()
+        handle_uploaded_file(request.FILES['csvupload'])
+        return HttpResponseRedirect('/about/')
 
-        return render(request, 'home.html', {'username': username})
+    else:
+        record_form = FolderForm()
+
+    return render(request, 'home.html', {'record_form': record_form})
+
+def about_page(request):
+    manny = 5
+    if manny == 4:
+        return render(request, 'home.html')
+    else:
+        return render(request, 'about.html')
+
+
+def Error404(request):
+    return render(request, '404_error.html')
+
+def AppMessage(request):
+    return render(request, 'app_message.html')
+
+
+def handle_uploaded_file(f):
+    with open('/home/manny/cleaningrecord/django_test/test.txt', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)

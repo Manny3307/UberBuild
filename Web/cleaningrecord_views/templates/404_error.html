@@ -53,6 +53,35 @@
             </div>
          </div>
       </div>
+      <script>
+         //const roomName = JSON.parse(document.getElementById('room-name').textContent);
+     
+         const chatSocket = new WebSocket(
+             'ws://'
+             + window.location.host
+             + '/ws/'
+         );
+     
+         // onmessage - An event listener to be called when a message is received from the server.
+         chatSocket.onmessage = function(e) {
+             // JSON.parse() converts the JSON object back into the original object,
+             // then examine and act upon its contents.
+             const data = JSON.parse(e.data);
+             document.getElementById('chat-log').innerHTML += (data.message + '\n');
+         };
+     
+         // onclose - An event listener to be called when the connection is closed.
+         chatSocket.onclose = function(e) {
+             console.error('Chat socket closed unexpectedly');
+         };
+     
+         
+         
+     
+         
+     </script>
+     
+     <span id="chat-log"></span>
       <!-- jQuery -->
       <script src="js/jquery.min.js"></script>
       <script src="js/popper.min.js"></script>
