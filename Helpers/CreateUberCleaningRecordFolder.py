@@ -7,7 +7,7 @@ import os, ntpath
 from shutil import copyfile
 
 # Load the Config JSON file from the config folder and read the respective values
-FolderConfigJSON = open('./Config/folder_config.json')
+FolderConfigJSON = open('../Config/folder_config.json')
 CreateConfigData = json.load(FolderConfigJSON)
 
 # Get The Base Path from the Config File.

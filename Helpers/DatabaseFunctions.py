@@ -20,7 +20,7 @@ class dbFunction:
     def __init__(self):
         try:
             #Get the fields of the Database Configuration from the Config File
-            DBConfig = open('./Config/DBConfig.json')
+            DBConfig = open('../Config/DBConfig.json')
             dbconf = json.load(DBConfig)
 
             global DBConnector, UserName, Password, ServerOrEndPoint, DatabaseName, engine

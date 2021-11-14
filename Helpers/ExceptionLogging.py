@@ -19,9 +19,9 @@ class UberExceptionLogging:
     #Load the KnownException.json and SuccessMessages.json to a dictionary
     def load_exception_success(self, exception_or_success):
         if(exception_or_success == "Exception"):
-            ExceptionOrSuccessJSON = open('./Config/KnownExceptions.json')
+            ExceptionOrSuccessJSON = open('../Config/KnownExceptions.json')
         else:
-            ExceptionOrSuccessJSON = open('./Config/SuccessMessages.json')
+            ExceptionOrSuccessJSON = open('../Config/SuccessMessages.json')
             
         CreateConfigData = json.load(ExceptionOrSuccessJSON)
 
@@ -31,7 +31,7 @@ class UberExceptionLogging:
     #Create new Log file for every day
     def create_check_new_log_file(self):
         global filename
-        Logfile = f"./Logs/UberLog_{now.strftime('%d_%m_%Y')}.json"
+        Logfile = f"../Logs/UberLog_{now.strftime('%d_%m_%Y')}.json"
         if not (os.path.exists(Logfile)):
             with open(Logfile,'w') as fp:
                 fp.write("[]")
@@ -64,6 +64,6 @@ class UberExceptionLogging:
         UberLogString.append(traceback.format_exc())
         UberLogString.append("Exiting the Program")
 
-        self.create_prog_log(UberLogString) # Send the exception to the UberLog.json Log File.
+        self.create_prog_log(UberLogString) # Send the exception to the UberLog.json Log File for the current day.
 
         if UberSystemExit == True: sys.exit()

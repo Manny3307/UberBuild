@@ -2,8 +2,8 @@
     "version": "0.2.0",
     "folder_configs": 
         {
-            "BasePath": "../cleaningrecord",
-            "BuildPath": "../UberBuild",
+            "BasePath": "/home/manny/cleaningrecord",
+            "BuildPath": "/home/manny/UberBuild",
             "HTMLFolder": "HTML",
             "HTMLFiles":
             {

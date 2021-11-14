@@ -91,7 +91,7 @@
                                             <div class="col-md-12">
                                                 <div class="md-form">
                                                     <div class="text-center text-md-left">
-                                                        <button class="btn cur-p btn-primary btn-block">Generate records</button>
+                                                        <button class="btn cur-p btn-primary btn-block" data-bs-toggle="modal" data-bs-target="staticBackdrop">Generate records</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -110,6 +110,9 @@
     </div>
 </div>
 <script>
+    document.getElementById('staticBackdrop').on('shown.bs.modal', function () {
+  $('#myInput').trigger('focus')
+})
     function showSelectedFile() {
       var fileseldiv = document.getElementById("filesel").style.display = 'block';
       var x = document.getElementById("inputGroupFile01").value;
@@ -125,12 +128,14 @@
         + window.location.host
         + '/appmsg/'
     );
+    
     // onmessage - An event listener to be called when a message is received from the server.
     chatSocket.onmessage = function(e) {
         // JSON.parse() converts the JSON object back into the original object,
         // then examine and act upon its contents.
         const data = JSON.parse(e.data);
-        document.getElementById('chat-log').innerHTML += (data.value + '\n');
+        
+        document.getElementById('chat-log').innerHTML += "<p>" + data.value + '</p>';
     };
 
     // onclose - An event listener to be called when the connection is closed.
@@ -149,6 +154,64 @@
 </script>
 
 <span id="chat-log"></span>
+<!-- Button trigger modal 
+<div class="modal-dialog modal-dialog-centered">...</div>
+
+<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">...</div>
+
+
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4">.col-md-4</div>
+      <div class="col-md-4 ms-auto">.col-md-4 .ms-auto</div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 ms-auto">.col-md-3 .ms-auto</div>
+      <div class="col-md-2 ms-auto">.col-md-2 .ms-auto</div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 ms-auto">.col-md-6 .ms-auto</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-9">
+        Level 1: .col-sm-9
+        <div class="row">
+          <div class="col-8 col-sm-6">Level 2: .col-8 .col-sm-6</div>
+          <div class="col-4 col-sm-6">Level 2: .col-4 .col-sm-6</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Launch static backdrop modal
+  </button>
+  
+  -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div> 
 <!--Section: Contact v.2-->
 <!--Section: Contact v.2-->
 {% endblock content %}

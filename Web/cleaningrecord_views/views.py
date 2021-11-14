@@ -5,10 +5,13 @@ from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 from .forms import FolderForm, LoginForm
+import sys
+sys.path.append("/home/manny/UberBuild/")
+from Callable.UberCleaningRecordBuilder import UberCleaningRecordBuilder
 
 # Create your views here.
 # Login Page Call
-def login_page(request):
+def login_page(request): 
     if request.method == 'POST':
         login_form = LoginForm(request.POST)
 
@@ -25,7 +28,10 @@ def home_page(request):
     if request.method == 'POST':
         record_form = FolderForm(request.POST, request.FILES)
 
-        handle_uploaded_file(request.FILES['csvupload'])
+        obj = UberCleaningRecordBuilder('Test12')
+        obj.execRecordBuilderFunctionality()
+        #obj.execRecordBuilderFunctionality()
+        #handle_uploaded_file(request.FILES['csvupload'])
         return HttpResponseRedirect('/about/')
 
     else:

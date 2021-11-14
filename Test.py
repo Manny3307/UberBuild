@@ -15,7 +15,6 @@ import time
 ws = websocket.WebSocket()
 ws.connect("ws://127.0.0.1:8000/appmsg/")
 for i in range(10):
-    time.sleep(3)
     ws.send(json.dumps({'value': f'Hi - {i}'}))
 
 
@@ -173,7 +172,7 @@ import mysql.connector
 hostname="manny-uber-records.cwl0oxqn3sec.us-east-2.rds.amazonaws.com"
 dbname="manny_uber_records_2021"
 uname="admin"
-pwd="pikolo486"
+pwd="mallory_486"
 
 # Create dataframe
 df = pd.DataFrame(data=[[111,'Thomas','35','United Kingdom'],
@@ -182,10 +181,12 @@ df = pd.DataFrame(data=[[111,'Thomas','35','United Kingdom'],
 		columns=['id','name','age','country'])
 
 # Create SQLAlchemy engine to connect to MySQL Database
-engine = create_engine("mysql+mysqlconnector://admin:pikolo486@manny-uber-records.cwl0oxqn3sec.us-east-2.rds.amazonaws.com/manny_uber_records_2021")
+engine = create_engine("mysql+mysqlconnector://angel:Angel_486@localhost/manny_uber_records_2021?auth_plugin=mysql_native_password")
+print("connected")
 
 # Convert dataframe to sql table                                   
-df.to_sql('users', engine, index=False)
+#df.to_sql('UberCleaningRecords', con=engine, index=False)
+engine.execute("select * from UberCleaningRecords").fetchall()
 
 import pandas as pd
 from sqlalchemy import create_engine
