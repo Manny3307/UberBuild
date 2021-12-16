@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-+yzd-07-8vb#p(fvsapq2pvbra0^1iz*plp$)0-j-5ld9z0#47
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cleaningrecord_views.apps.CleaningrecordViewsConfig',
+    'websocket',
 ]
 
 MIDDLEWARE = [
@@ -61,7 +62,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            'hosts': [('localhost', 6379)],
+            'hosts': [('192.168.1.16', 6379)],
         },
         
     }
@@ -91,8 +92,14 @@ WSGI_APPLICATION = 'uber_web.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'app',
+        'USER': 'clean_records',
+        'PASSWORD': 'Cleaning_486',
+        'HOST': '172.21.0.2',
+        'PORT': '3306',
     }
 }
 

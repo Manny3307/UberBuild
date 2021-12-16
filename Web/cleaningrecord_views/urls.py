@@ -7,6 +7,4 @@ urlpatterns = [
     path('home/', views.home_page, name='home'),
     path('about/', views.about_page, name='about'),
     path('404/', views.Error404, name='404'),
-    path('appmsg/', views.AppMessage, name='appmsg'),
-    
 ]

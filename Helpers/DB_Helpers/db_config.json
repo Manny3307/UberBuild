@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "DBConfigs": 
+        {
+            "mysql":
+            {
+                "DBConnecter": "mysql+mysqlconnector",
+                "UserName": "clean_records",
+                "Password": "Cleaning_486",
+                "ServerOrEndPoint": "172.21.0.2",
+                "DatabaseName": "app",
+                "AuthPlugin": "auth_plugin=mysql_native_password"
+            }
+        }   
+}

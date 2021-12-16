@@ -1,5 +1,6 @@
 import json
 import os,sys
+import socket
 import pandas as pd
 from datetime import datetime as dt, timedelta
 import random
@@ -10,12 +11,114 @@ from json import dumps
 
 import redis
 import websocket
-import time
+import time, datetime
 
+
+
+ 
+#"24 Aug, 2021 04:00 PM"
+#"%d %b,  %Y   %I:%M %p" 
+
+date_str = "24 Sep, 2021 05:00 PM"
+date_format = "%d %b, %Y %I:%M %p"
+
+if(datetime.datetime.strptime(date_str, date_format)):
+    print("Valid Date")
+else:
+    print("Invalid Date")
+
+
+
+#from Callable import UberCleaningRecordBuilder 
+from confluent_kafka import Producer, Consumer
+from time import sleep
+from threading import Thread
+import threading, logging, time
+from channels.testing import WebsocketCommunicator, ChannelsLiveServerTestCase, live
+import pysftp
+import sys
+
+from websocket import create_connection
 ws = websocket.WebSocket()
-ws.connect("ws://127.0.0.1:8000/appmsg/")
-for i in range(10):
-    ws.send(json.dumps({'value': f'Hi - {i}'}))
+ws.connect("ws://192.168.1.16:8080/appmsg/")
+
+#ws.send("Hello, World")
+
+df = pd.read_csv("CSV/uber_driving_records_dsiygefvah.csv")
+print(df.head(5))
+
+
+def valid_date(date_str):
+    date_format = "%d %b, %Y %I:%M %p"
+    try:
+        datetime.datetime.strptime(date_str, date_format)
+    except:
+        return date_str
+
+    
+date_list = []
+for e in df["DateTimeTrip"]:
+    daterror = valid_date(e)
+    if daterror != None:
+        date_list.append(daterror)
+
+
+print("Errored Dates are: ")
+print(date_list)
+
+#"UberTripData['DateTimeTrip'].apply(lambda x: self.UberSplitDateTime(x, random.randint(lower_time_range,upper_time_range)))",
+
+
+class ExampleConsumer:
+    broker = "172.23.0.3:9092"
+    topic = "appmsg"
+    group_id = "consumer-1"
+
+    def start_listener(self):
+        consumer_config = {
+            'bootstrap.servers': self.broker,
+            'group.id': self.group_id,
+            'auto.offset.reset': 'largest',
+            'enable.auto.commit': 'false',
+            'max.poll.interval.ms': '86400000'
+        }
+
+        consumer = Consumer(consumer_config)
+        consumer.subscribe([self.topic])
+
+        try:
+            while True:
+                print("Listening")
+                # read single message at a time
+                msg = consumer.poll(0)
+                
+
+                if msg is None:
+                    sleep(5)
+                    continue
+                if msg.error():
+                    print("Error reading message : {}".format(msg.error()))
+                    continue
+                # You can parse message and save to data base here
+                print(msg.value())
+                ws.send(json.dumps({'value': str(msg.value())}))
+                consumer.commit()
+
+        except Exception as ex:
+            print("Kafka Exception : {}", ex)
+
+        finally:
+            print("closing consumer")
+            consumer.close()
+
+#RUNNING CONSUMER FOR READING MESSAGE FROM THE KAFKA TOPIC
+#my_consumer = ExampleConsumer()
+#my_consumer.start_listener()
+
+
+
+
+
 
 
 '''publisher = redis.Redis(host = 'localhost', port = 6379)

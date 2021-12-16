@@ -5,9 +5,16 @@ from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 from .forms import FolderForm, LoginForm
-import sys
-sys.path.append("/home/manny/UberBuild/")
-from Callable.UberCleaningRecordBuilder import UberCleaningRecordBuilder
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+import sys, os
+import requests, json
+import string, random
+import pathlib, datetime
+
+sys.path.append("./../../UberBuild/")
+from Helpers.AWS_Helpers.aws_functions import AWSHelperFunctions
+from Helpers.General_Helpers.general_functions import GeneralFunctions
 
 # Create your views here.
 # Login Page Call
@@ -26,17 +33,33 @@ def login_page(request):
 # Home Page Call
 def home_page(request):
     if request.method == 'POST':
+        haserror = False
         record_form = FolderForm(request.POST, request.FILES)
+        errored_dates = []
+        objGeneral = GeneralFunctions()
+        csv_file = request.FILES['csvupload']
+        csv_file_name = f"uber_driving_records_{objGeneral.unique_string(10)}.csv" 
+        csv_file_path = objGeneral.handle_uploaded_file(csv_file, csv_file_name)
+        errored_dates = objGeneral.validate_csv(csv_file_path)
 
-        obj = UberCleaningRecordBuilder('Test12')
-        obj.execRecordBuilderFunctionality()
+        if(len(errored_dates) != 0):
+            haserror = True
+            print(errored_dates)
+            return render(request, 'home.html', {'record_form': record_form, 'error_date':errored_dates, 'haserror': haserror})
+    
+        objaws = AWSHelperFunctions()
+        objaws.upload_file_to_s3(csv_file_path)
+        
+        #obj = UberCleaningRecordBuilder('Test12')
+        #obj.execRecordBuilderFunctionality()
         #obj.execRecordBuilderFunctionality()
         #handle_uploaded_file(request.FILES['csvupload'])
-        return HttpResponseRedirect('/about/')
-
+        
+        #return HttpResponseRedirect('/about/')
+        
     else:
         record_form = FolderForm()
-
+        
     return render(request, 'home.html', {'record_form': record_form})
 
 def about_page(request):
@@ -52,9 +75,3 @@ def Error404(request):
 
 def AppMessage(request):
     return render(request, 'app_message.html')
-
-
-def handle_uploaded_file(f):
-    with open('/home/manny/cleaningrecord/django_test/test.txt', 'wb+') as destination:
-        for chunk in f.chunks():
-            destination.write(chunk)

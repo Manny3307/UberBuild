@@ -1,0 +1,45 @@
+[
+ {
+  "UberDateLog": "15/12/2021 04-40-46 AM",
+  "UberLogs": [
+   "Can't load the AWS configurations, Please check if the file is in correct location.",
+   "Traceback (most recent call last):\n  File \"/home/manny/UberBuild/Web/./../../UberBuild/Helpers/AWS_Helpers/aws_functions.py\", line 16, in __init__\n    AWSConfig = open('./aws_config.json')\nFileNotFoundError: [Errno 2] No such file or directory: './aws_config.json'\n",
+   "Exiting the Program"
+  ]
+ },
+ {
+  "UberDateLog": "15/12/2021 04-40-46 AM",
+  "UberLogs": [
+   "Can't load the AWS configurations, Please check if the file is in correct location.",
+   "Traceback (most recent call last):\n  File \"/home/manny/UberBuild/Web/./../../UberBuild/Helpers/AWS_Helpers/aws_functions.py\", line 16, in __init__\n    AWSConfig = open('./aws_config.json')\nFileNotFoundError: [Errno 2] No such file or directory: './aws_config.json'\n",
+   "Exiting the Program"
+  ]
+ },
+ {
+  "UberDateLog": "15/12/2021 04-51-19 AM",
+  "UberLogs": [
+   "ERROR: Connection cannot be established with the database. User credentials can't be fetched from database",
+   "Traceback (most recent call last):\n  File \"/home/manny/UberBuild/Web/./../../UberBuild/Helpers/DB_Helpers/db_functions.py\", line 42, in get_user_credentials\n    engine = db.create_engine(f\"{DBConnector}://{UserName}:{Password}@{ServerOrEndPoint}/{DatabaseName}?{AuthenticationPlugin}\", encoding='utf8')\nNameError: name 'DBConnector' is not defined\n",
+   "Exiting the Program"
+  ]
+ },
+ {
+  "UberDateLog": "15/12/2021 04-51-19 AM",
+  "UberLogs": [
+   "ERROR: Connection cannot be established with the database. User credentials can't be fetched from database",
+   "Traceback (most recent call last):\n  File \"/home/manny/UberBuild/Web/./../../UberBuild/Helpers/DB_Helpers/db_functions.py\", line 42, in get_user_credentials\n    engine = db.create_engine(f\"{DBConnector}://{UserName}:{Password}@{ServerOrEndPoint}/{DatabaseName}?{AuthenticationPlugin}\", encoding='utf8')\nNameError: name 'DBConnector' is not defined\n",
+   "Exiting the Program",
+   "Can't load the AWS configurations, Please check if the file is in correct location.",
+   "Traceback (most recent call last):\n  File \"/home/manny/UberBuild/Web/./../../UberBuild/Helpers/AWS_Helpers/aws_functions.py\", line 26, in __init__\n    CleanRecKey = cleaningRecCredentials[\"aws_key\"]\nTypeError: 'NoneType' object is not subscriptable\n",
+   "Exiting the Program"
+  ]
+ },
+ {
+  "UberDateLog": "15/12/2021 04-54-06 AM",
+  "UberLogs": [
+   "An ERROR occured while uploading the file. Please check if internet is connected or not.",
+   "Traceback (most recent call last):\n  File \"/home/manny/UberBuild/Web/./../../UberBuild/Helpers/AWS_Helpers/aws_functions.py\", line 55, in upload_file_to_s3\n    file_dir, file_name = os.path.split(file_path)\n  File \"/home/manny/anaconda3/envs/uberrecords/lib/python3.9/posixpath.py\", line 103, in split\n    p = os.fspath(p)\nTypeError: expected str, bytes or os.PathLike object, not InMemoryUploadedFile\n",
+   "Exiting the Program"
+  ]
+ }
+]

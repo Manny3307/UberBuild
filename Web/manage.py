@@ -2,12 +2,16 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+import django
+from django.core.management.commands.runserver import Command as runserver
 
 
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'uber_web.settings')
     try:
+        django.setup()
+        runserver.default_port = "8080"
         from django.core.management import execute_from_command_line
     except ImportError as exc:
         raise ImportError(

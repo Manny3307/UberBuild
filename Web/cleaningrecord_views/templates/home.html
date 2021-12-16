@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
+<script>
+    function showerror(){
+        document.getElementById('date_error').style.visibility = "hidden";
+    }
+</script>
 <div class="midde_cont">
     <div class="container-fluid">
         <div class="row column_title">
@@ -101,8 +106,23 @@
                                    
                                 </div>
                                 <!--Grid column-->
+                                
                             </div>
                         </section>
+                       {% if haserror is True %}
+                        <div id="date_error">
+                           <table>
+                               <tr>
+                                   <td style="font-weight: bold;">Following Dates are not formated properly in the cleaning records. Please fix it in the csv file and upload again.</td>
+                               </tr>
+                                    {%for errordate in error_date%}
+                                        <tr>
+                                            <td>{{errordate}}</td>
+                                        </tr>    
+                                    {% endfor %}
+                            </table>
+                        </div>
+                        {% endif %}
                     </div>
                  </div>
             </div>
@@ -124,9 +144,7 @@
     //const roomName = JSON.parse(document.getElementById('room-name').textContent);
 
     const chatSocket = new WebSocket(
-        'ws://'
-        + window.location.host
-        + '/appmsg/'
+        'ws://192.168.1.16:8080/appmsg/'
     );
     
     // onmessage - An event listener to be called when a message is received from the server.
@@ -154,6 +172,7 @@
 </script>
 
 <span id="chat-log"></span>
+
 <!-- Button trigger modal 
 <div class="modal-dialog modal-dialog-centered">...</div>
 
