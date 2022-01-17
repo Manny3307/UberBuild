@@ -58,4 +58,7 @@ class AWSHelperFunctions:
             bucket.upload_file(Filename=file_path, Key=file_name,)
             
         except:
-            objUberExceptionLogging.UberLogException("An ERROR occured while uploading the file. Please check if internet is connected or not.", True, True)
+            objUberExceptionLogging.UberLogException("An ERROR occured while uploading the file. Please check if internet is connected or not.", False, False)
+            return "An ERROR occured while uploading the file. Please check if internet is connected or not and try again!!!"
+        
+        return ""

@@ -8,17 +8,15 @@ class GeneralFunctions:
     def __init__(self):
         try:
             #Get the fields of the Database Configuration from the Config File
+            global DateFormat, general_conf
             GeneralConfig = open('../Helpers/General_Helpers/general_config.json')
             general_conf = json.load(GeneralConfig)
-
-            global DateFormat
-            DateFormat = general_conf["General_Configs"]["DateFormat"]
         except:
             print("ERROR")
 
     
     def valid_date(self, date_str):
-        date_format = DateFormat
+        date_format = self.get_config_values("DateFormat")
         try:
             datetime.datetime.strptime(date_str, date_format)
         except:
@@ -50,3 +48,8 @@ class GeneralFunctions:
         result = ''.join((random.sample(letters, length))) 
 
         return result
+    
+    def get_config_values(self, config_header):
+        config_value = general_conf["General_Configs"][config_header]
+
+        return config_value

@@ -109,7 +109,16 @@
                                 
                             </div>
                         </section>
-                       {% if haserror is True %}
+                        {% if hasawserror is True %}
+                        <div id="aws_error">
+                           <table>
+                               <tr>
+                                   <td style="font-weight: bold;">{{ successupload }}</td>
+                               </tr>
+                            </table>
+                        </div>
+                        {% endif %}
+                        {% if haserror is True %}
                         <div id="date_error">
                            <table>
                                <tr>

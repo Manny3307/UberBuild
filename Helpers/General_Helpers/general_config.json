@@ -2,7 +2,8 @@
     "version": "0.2.0",
     "General_Configs": 
         {
-            "DateFormat": "%d %b, %Y %I:%M %p"
+            "DateFormat": "%d %b, %Y %I:%M %p",
+            "CreateRecords": "http://172.21.0.3:8000/api/cleaning_rec/create-records/"
         }
     
 }

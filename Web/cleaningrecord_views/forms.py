@@ -12,3 +12,4 @@ class FolderForm(forms.Form):
     foldername = forms.CharField(widget=forms.TextInput(attrs={'required': True, 'maxlength': 50, 'id': 'inputLGEx', 'class':'form-control'}))
     csvupload = forms.FileField(widget=forms.FileInput(attrs={'class':'custom-file-input', 'id':'inputGroupFile01', 'name': 'csvupload' , 'onchange':'showSelectedFile()', 'aria-describedby':'inputGroupFileAddon01'}))
     addcomments = forms.CharField(widget=forms.Textarea(attrs={'id':'message', 'name':'message', 'rows':'3', 'class':'form-control md-textarea'}), required=False)
+    csvfilename = forms.CharField(widget=forms.HiddenInput())

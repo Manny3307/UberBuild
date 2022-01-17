@@ -1,3 +1,4 @@
+from traceback import print_tb
 from django import forms
 from django.http import HttpResponse
 from django.http.request import HttpRequest
@@ -34,6 +35,7 @@ def login_page(request):
 def home_page(request):
     if request.method == 'POST':
         haserror = False
+        
         record_form = FolderForm(request.POST, request.FILES)
         errored_dates = []
         objGeneral = GeneralFunctions()
@@ -41,15 +43,23 @@ def home_page(request):
         csv_file_name = f"uber_driving_records_{objGeneral.unique_string(10)}.csv" 
         csv_file_path = objGeneral.handle_uploaded_file(csv_file, csv_file_name)
         errored_dates = objGeneral.validate_csv(csv_file_path)
+        sendfolderandfile = {"folder_name": record_form['foldername'].value(), "csv_file_name": csv_file_name }
+        
 
         if(len(errored_dates) != 0):
             haserror = True
-            print(errored_dates)
             return render(request, 'home.html', {'record_form': record_form, 'error_date':errored_dates, 'haserror': haserror})
     
         objaws = AWSHelperFunctions()
-        objaws.upload_file_to_s3(csv_file_path)
-        
+        successupload = objaws.upload_file_to_s3(csv_file_path)
+        print(successupload)
+        if successupload == "":
+            clean_record_result = requests.post(url = "http://172.21.0.3:8000/api/cleaning_rec/create-records/", data = sendfolderandfile, headers={"Authorization":"Token 2a6f3b67d79712731e228d53df5594075753a9fa" })
+            print(f"Status Code = {clean_record_result.status_code}")
+        else:
+            hasawserror = True
+            return render(request, 'home.html', {'record_form': record_form, 'successupload':successupload, 'hasawserror': hasawserror})
+
         #obj = UberCleaningRecordBuilder('Test12')
         #obj.execRecordBuilderFunctionality()
         #obj.execRecordBuilderFunctionality()

@@ -13,21 +13,24 @@ import redis
 import websocket
 import time, datetime
 
+#'2022-01-01 06:02:00' 
+#'%d %b, %Y %I:%M %p'
 
-
+date_str = "2022-01-01 06:02:00"
+date_format = "%d %b, %Y %I:%M %p"
+date_str = dt(date_str)
+print(date_str.strftime('%d %b, %Y %I:%M %p'))
  
 #"24 Aug, 2021 04:00 PM"
 #"%d %b,  %Y   %I:%M %p" 
 
-date_str = "24 Sep, 2021 05:00 PM"
-date_format = "%d %b, %Y %I:%M %p"
 
 if(datetime.datetime.strptime(date_str, date_format)):
     print("Valid Date")
 else:
     print("Invalid Date")
 
-
+'''
 
 #from Callable import UberCleaningRecordBuilder 
 from confluent_kafka import Producer, Consumer
@@ -41,10 +44,10 @@ import sys
 from websocket import create_connection
 ws = websocket.WebSocket()
 ws.connect("ws://192.168.1.16:8080/appmsg/")
-
+'''
 #ws.send("Hello, World")
 
-df = pd.read_csv("CSV/uber_driving_records_dsiygefvah.csv")
+'''df = pd.read_csv("CSV/uber_driving_records_dsiygefvah.csv")
 print(df.head(5))
 
 
@@ -65,12 +68,12 @@ for e in df["DateTimeTrip"]:
 
 print("Errored Dates are: ")
 print(date_list)
-
+'''
 #"UberTripData['DateTimeTrip'].apply(lambda x: self.UberSplitDateTime(x, random.randint(lower_time_range,upper_time_range)))",
 
-
+'''
 class ExampleConsumer:
-    broker = "172.23.0.3:9092"
+    broker = "172.28.0.3:9092"
     topic = "appmsg"
     group_id = "consumer-1"
 
@@ -112,11 +115,11 @@ class ExampleConsumer:
             consumer.close()
 
 #RUNNING CONSUMER FOR READING MESSAGE FROM THE KAFKA TOPIC
-#my_consumer = ExampleConsumer()
-#my_consumer.start_listener()
+my_consumer = ExampleConsumer()
+my_consumer.start_listener()
 
 
-
+'''
 
 
 
