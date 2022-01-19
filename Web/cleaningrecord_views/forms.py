@@ -1,6 +1,11 @@
 from django import forms
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+import sys, os
+
+sys.path.append("./../../UberBuild/")
+from Helpers.AWS_Helpers.aws_functions import AWSHelperFunctions
+from Helpers.General_Helpers.general_functions import GeneralFunctions
 
 
 class LoginForm(forms.Form):
@@ -13,3 +18,10 @@ class FolderForm(forms.Form):
     csvupload = forms.FileField(widget=forms.FileInput(attrs={'class':'custom-file-input', 'id':'inputGroupFile01', 'name': 'csvupload' , 'onchange':'showSelectedFile()', 'aria-describedby':'inputGroupFileAddon01'}))
     addcomments = forms.CharField(widget=forms.Textarea(attrs={'id':'message', 'name':'message', 'rows':'3', 'class':'form-control md-textarea'}), required=False)
     csvfilename = forms.CharField(widget=forms.HiddenInput())
+
+class PDFToCSVForm(forms.Form):
+    objGeneral = GeneralFunctions()
+    folder_list = objGeneral.get_folder_list()
+    print(folder_list)
+    foldername = forms.ChoiceField(choices = folder_list, widget=forms.Select(attrs={'class': 'form-control'}))
+    addcomments = forms.CharField(widget=forms.Textarea(attrs={'id':'message', 'name':'message', 'rows':'3', 'class':'form-control md-textarea'}), required=False)

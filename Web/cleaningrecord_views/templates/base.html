@@ -62,9 +62,8 @@
                <div class="sidebar_blog_2">
                   <h4>Cleaning Records Dashboard</h4>
                   <ul class="list-unstyled components">
-                     <li class="active">
-                        <a href="#dashboard" data-toggle="collapse" aria-expanded="false"><i class="fa fa-cogs yellow_color"></i> <span>Generate Cleaning Records</span></a>
-                     </li>
+                     <li><a href="{% url 'home' %}"><i class="fa fa-cogs yellow_color"></i> <span>Generate Cleaning Records</span></a></li>
+                     <li><a href="{% url 'pdftocsv' %}"><i class="fa fa-book" style="color: #ff5722;"></i> <span>PDF to CSV</span></a></li>
                      <li>
                         <a href="#element" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-wrench red_color"></i> <span>Edit Configurations</span></a>
                         <ul class="collapse list-unstyled" id="element">

@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block content %}
+<script>
+    function showerror(){
+        document.getElementById('date_error').style.visibility = "hidden";
+    }
+</script>
+<div class="midde_cont">
+    <div class="container-fluid">
+        <div class="row column_title">
+            <div class="col-md-12">
+                <div class="page_title">
+                    <h2>Convert records in PDF format to CSV file</h2>
+                </div>
+                <div class="full_container">
+                    
+                            
+                            
+                    <div class="container">
+                        <section class="mb-4">
+
+                            <!--Section heading-->
+                            <div style="font-size: xx-large;">Convert records in PDF format to CSV file</div>        
+                            
+                            <div class="row">
+                        
+                                <!--Grid column-->
+                                <div class="col-md-9 mb-md-0 mb-5">
+                                    <form method="post" action="{% url 'pdftocsv' %}" enctype="multipart/form-data">
+                                        <fieldset>
+                                        {% csrf_token %}
+                                        <!--Grid row-->
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="md-form form-lg">
+                                                    {{ pdf_to_csv_form.foldername }}
+                                                    <label for="sl_folder_list" data-toggle="tooltip" data-placement="right" title="Choose a folder name where you saved your pdf files containing Trips.">Select Folder Name</label>
+                                                    <span class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Choose a folder name where you saved your pdf files containing Trips."></span>
+                                                  </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!--Grid row-->
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="md-form">
+                                                    {{ pdf_to_csv_form.addcomments }}
+                                                    <label for="message">Additional comments for converting PDF files to CSV file </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Grid row-->
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="md-form">
+                                                    <div class="text-center text-md-left">
+                                                        &nbsp;
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="md-form">
+                                                    <div class="text-center text-md-left">
+                                                        <button class="btn cur-p btn-primary btn-block" data-bs-toggle="modal" data-bs-target="staticBackdrop">Convert PDF to CSV</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </fieldset>
+                                    </form>
+                                   
+                                </div>
+                                <!--Grid column-->
+                                
+                            </div>
+                        </section>
+                        {% if has_error is True %}
+                        <div id="date_error">
+                           <table>
+                               <tr>
+                                   <td style="font-weight: bold;">{{ error_message }}</td>
+                               </tr>
+                            </table>
+                        </div>
+                        {% endif %}
+                        {% if is_success is True %}
+                        <div id="date_error">
+                           <table>
+                               <tr>
+                                   <td style="font-weight: bold;">{{ success_message }}</td>
+                               </tr>
+                            </table>
+                        </div>
+                        {% endif %}
+
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById('staticBackdrop').on('shown.bs.modal', function () {
+  $('#myInput').trigger('focus')
+})
+    
+</script>
+<!--Section: Contact v.2-->
+<!--Section: Contact v.2-->
+{% endblock content %}

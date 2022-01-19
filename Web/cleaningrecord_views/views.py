@@ -5,7 +5,7 @@ from django.http.request import HttpRequest
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
-from .forms import FolderForm, LoginForm
+from .forms import FolderForm, LoginForm, PDFToCSVForm
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 import sys, os
@@ -59,18 +59,34 @@ def home_page(request):
         else:
             hasawserror = True
             return render(request, 'home.html', {'record_form': record_form, 'successupload':successupload, 'hasawserror': hasawserror})
-
-        #obj = UberCleaningRecordBuilder('Test12')
-        #obj.execRecordBuilderFunctionality()
-        #obj.execRecordBuilderFunctionality()
-        #handle_uploaded_file(request.FILES['csvupload'])
-        
-        #return HttpResponseRedirect('/about/')
-        
     else:
         record_form = FolderForm()
         
     return render(request, 'home.html', {'record_form': record_form})
+
+def pdf_to_csv(request):
+    pdf_to_csv_form = PDFToCSVForm(request.POST, request.FILES)
+    folder_name = pdf_to_csv_form['foldername'].value()
+    
+    if request.method == 'POST':
+        has_error = False
+        objGeneral = GeneralFunctions()
+        pdf_exists = objGeneral.check_pdf_file(folder_name)
+        if(not pdf_exists):
+            print(pdf_exists)
+            has_error = True
+            error_message = "No PDF file(s) exists in the selected folder. Make sure you have the PDF files in the right and selected the right folder."
+            return render(request, 'pdf_to_csv.html', {'pdf_to_csv_form': pdf_to_csv_form, 'has_error': has_error, 'error_message': error_message})
+        else:
+            success_message = f"UberTripRecord.csv successfully created in {folder_name}"
+            is_success = True
+            objGeneral.generate_csv_with_trip_datetime(folder_name)
+            return render(request, 'pdf_to_csv.html', {'pdf_to_csv_form': pdf_to_csv_form, 'is_success': is_success, 'success_message': success_message})
+    else:
+        pdf_to_csv_form = PDFToCSVForm()
+        
+    return render(request, 'pdf_to_csv.html', {'pdf_to_csv_form': pdf_to_csv_form})
+
 
 def about_page(request):
     manny = 5

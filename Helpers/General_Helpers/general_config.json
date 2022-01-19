@@ -3,7 +3,8 @@
     "General_Configs": 
         {
             "DateFormat": "%d %b, %Y %I:%M %p",
-            "CreateRecords": "http://172.21.0.3:8000/api/cleaning_rec/create-records/"
+            "CreateRecords": "http://172.21.0.3:8000/api/cleaning_rec/create-records/",
+            "StatementsFolder": "../../Uber_Statements"
         }
     
 }
